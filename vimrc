@@ -1,9 +1,11 @@
 "==========================================
 " Author:  gtchaos
-" Version: 1.0.1
+" Version: 8.1
 " Email: gsls1817@gmail.com
+" BlogPost: http://www.gsls1817.me
+" ReadMe: README.md
 " Sections:
-"       -> Initial Plugin 加载插件 use bundle
+"       -> Initial Plugin 加载插件
 "       -> General Settings 基础设置
 "       -> Display Settings 展示/排版等界面格式设置
 "       -> FileEncode Settings 文件编码设置
@@ -12,6 +14,7 @@
 "       -> FileType Settings  针对文件类型的设置
 "       -> Theme Settings  主题设置
 "
+"       -> 插件配置和具体设置在vimrc.bundles中
 "==========================================
 
 "==========================================
@@ -98,12 +101,12 @@ let g:solarized_visibility="normal"
 " let g:solarized_termcolors=256
 
 " 主题 molokai
-"Bundle 'tomasr/molokai'
+Bundle 'tomasr/molokai'
 " monokai原始背景色
-"let g:molokai_original = 1
+let g:molokai_original = 1
 
 " 主题 tomorrow
-"Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'chriskempson/vim-tomorrow-theme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -264,24 +267,6 @@ set shiftround    " 缩进时，取整 use multiple of shiftwidth when indenting
 set hidden
 set wildmode=list:longest
 set ttyfast
-
-
-" 相对行号      行号变成相对，可以用 nj  nk   进行跳转 5j   5k 上下跳5行
-set relativenumber number
-au FocusLost * :set norelativenumber number
-au FocusGained * :set relativenumber
-" 插入模式下用绝对行号, 普通模式下用相对
-autocmd InsertEnter * :set norelativenumber number
-autocmd InsertLeave * :set relativenumber
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber number
-  else
-    set relativenumber
-  endif
-endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
-
 
 "==========================================
 " FileEncode Settings 文件编码,格式
