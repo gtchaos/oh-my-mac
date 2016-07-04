@@ -98,12 +98,12 @@ let g:solarized_visibility="normal"
 " let g:solarized_termcolors=256
 
 " 主题 molokai
-Bundle 'tomasr/molokai'
+"Bundle 'tomasr/molokai'
 " monokai原始背景色
-let g:molokai_original = 1
+"let g:molokai_original = 1
 
 " 主题 tomorrow
-Bundle 'chriskempson/vim-tomorrow-theme'
+"Bundle 'chriskempson/vim-tomorrow-theme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -620,6 +620,4 @@ set t_Co=256
 "let g:solarized_termcolors=256
 " colorscheme solarized
 " colorscheme molokai
-" colorscheme Tomorrow-Night
-" colorscheme Tomorrow-Night-Bright
 colorscheme desert
