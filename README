@@ -1,3 +1,14 @@
+Caution: oh-my-mac中的vimrc配置依赖于插件管理器vundle，so...你懂得！
+Firstly Set up Vundle:
+
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+之后，将clone的vim文件内容拷贝到~/.vimrc，然后执行:VundleInstall即可使用全新的vim以及其中默认的几款插件（当然你也可以根据所需额外配置喔）。
+
+
+下面主要讲解一下Mac OS X终端的配色方案
+================================================================================================================================================
+
 相信长期浸泡在终端和代码的小伙伴们都有一套自己喜爱的配色方案。以前一直在用简单、适合阅读的 Terminal.app 配色方案，换到 MacBook Pro with Retina display 后发现这个配色时间看长了眼睛有点累。不断有人推荐 Solarized，看了一些截图，感觉还不错，决定试一下。
 
 Solarized 是目前最完整的 Terminal/Editor/IDE 配色项目，几乎覆盖所有主流操作系统（Mac OS X, Linux, Windows）、编辑器和 IDE（Vim, Emacs, Xcode, TextMate, NetBeans, Visual Studio 等），终端（iTerm2, Terminal.app, Putty 等）。类似的项目还有 Tomorrow Theme.
