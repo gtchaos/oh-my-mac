@@ -2,7 +2,7 @@
 " Author:  gtchaos
 " Version: 8.1
 " Email: gsls1817@gmail.com
-" BlogPost: http://www.gsls1817.me
+" GitHub: https://github.com/gtchaos/oh-my-mac
 " ReadMe: README.md
 " Sections:
 "       -> Initial Plugin 加载插件
