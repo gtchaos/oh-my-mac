@@ -2,7 +2,7 @@
 " Author:  gtchaos
 " Version: 8.1
 " Email: gsls1817@gmail.com
-" GitHub: https://github.com/gtchaos/oh-my-mac
+" BlogPost: http://www.gsls1817.me
 " ReadMe: README.md
 " Sections:
 "       -> Initial Plugin 加载插件
@@ -41,6 +41,27 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" 史上最牛逼的自动补全插件
+Bundle 'Valloric/YouCompleteMe'
+" for ycm
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>*'
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <F4> :YcmDiags<CR>
+
+" 神级插件，ZenCoding可以让你以一种神奇而无比爽快的感觉写HTML、CSS
+" Bundle 'ZenCoding.vim'
+
+" 必不可少，在VIM的编辑窗口树状显示文件目录
+Bundle 'The-NERD-tree'
+" NERD出品的快速给代码加注释插件，选中，`ctrl+h`即可注释多种语言代码；
+Bundle 'The-NERD-Commenter'
+" 解放生产力的神器，简单配置，就可以按照自己的风格快速输入大段代码。
+" Bundle 'UltiSnips'
+
 
 " ################### 显示增强 ###################
 
@@ -207,7 +228,7 @@ set showmode
 
 "显示行号：
 set number
-" 取消折叠 set nowrap
+" 取消换行。
 set wrap
 
 " 括号配对情况,跳转并高亮一下匹配的括号
@@ -605,4 +626,6 @@ set t_Co=256
 "let g:solarized_termcolors=256
 " colorscheme solarized
 " colorscheme molokai
+" colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night-Bright
 colorscheme desert
