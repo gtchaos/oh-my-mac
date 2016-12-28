@@ -56,18 +56,20 @@ nmap <F4> :YcmDiags<CR>
 " Bundle 'ZenCoding.vim'
 
 " 必不可少，在VIM的编辑窗口树状显示文件目录
-Bundle 'The-NERD-tree'
+Bundle 'scrooloose/nerdtree'
 " NERD出品的快速给代码加注释插件，选中，`ctrl+h`即可注释多种语言代码；
-Bundle 'The-NERD-Commenter'
+Bundle 'scrooloose/nerdcommenter'
 " 解放生产力的神器，简单配置，就可以按照自己的风格快速输入大段代码。
 " Bundle 'UltiSnips'
-
+" 语法检测 
+Bundle 'vim-syntastic/syntastic'
 
 " ################### 显示增强 ###################
 
 " 状态栏增强展示
 " 新的airline配置
-Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
+let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -77,10 +79,11 @@ let g:airline_right_sep = '◀'
 let g:airline_right_alt_sep = '❮'
 let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
-" 是否打开tabline
-" let g:airline#extensions#tabline#enabled = 1
 
 
+" edit history, 可以查看回到某个历史状态
+Bundle 'sjl/gundo.vim'
+noremap <leader>h :GundoToggle<CR>
 
 " 括号显示增强
 Bundle 'kien/rainbow_parentheses.vim'
@@ -225,6 +228,11 @@ set showmode
 "set scrolloff=7
 
 " set winwidth=79
+
+" 命令行（在状态行下）的高度，默认为1，这里是2
+set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
+" Always show the status line - use 2 lines for the status bar
+set laststatus=2
 
 "显示行号：
 set number
@@ -623,9 +631,9 @@ endif
 " theme主题
 set background=dark
 set t_Co=256
-"let g:solarized_termcolors=256
-" colorscheme solarized
+let g:solarized_termcolors=256
+colorscheme solarized
 " colorscheme molokai
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
-colorscheme desert
+" colorscheme desert

@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
-#export VIMRUNTIME=/usr/share/vim/vim74
-export VIMRUNTIME=/usr/local/Cellar/vim/8.0.0084/share/vim/vim80
+# export VIMRUNTIME=/usr/share/vim/vim74
+export VIMRUNTIME=/usr/share/vim/vim74
 export ZSH=$HOME/.oh-my-zsh
 export VIM=$HOME/.vim
 # Set name of the theme to load.
