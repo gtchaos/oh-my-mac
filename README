@@ -3,7 +3,7 @@ Firstly Set up Vundle:
 
 $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-之后，将clone的vim文件内容拷贝到~/.vimrc，然后执行:VundleInstall即可使用全新的vim以及其中默认的几款插件（当然你也可以根据所需额外配置喔）。
+之后，将clone的vimrc文件内容拷贝到~/.vimrc(注意：记得备份)，然后执行:VundleInstall即可使用全新的vim以及其中默认的几款插件（当然你也可以根据所需额外配置喔）。
 
 
 下面主要讲解一下Mac OS X终端的配色方案

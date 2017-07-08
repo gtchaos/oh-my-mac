@@ -9,7 +9,6 @@ mv ~/.vimrc ~/.vimrc.backup
 cp vimrc ~/.vimrc
 mv ~/.zshrc ~/.zshrc.backup
 cp zshrc ~/.zshrc
-mv ~/.bash_profile ~/.bash_profile.backup
 cp bash_profile ~/.bash_profile
 mv ~/.bash_aliases ~/.bash_aliases.backup
 cp bash_aliases ~/.bash_aliases 
