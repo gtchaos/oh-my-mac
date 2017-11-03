@@ -569,6 +569,32 @@ function! AutoSetFileHead()
     if &filetype == 'python'
         call setline(1, "\#!/usr/bin/env python")
         call append(1, "\# encoding: utf-8")
+        call append(2, '########################################################################')
+        call append(3, '#')
+        call append(4, '# Copyright (c) 2017 Baidu.com, Inc. All Rights Reserved')
+        call append(5, '#')
+        call append(6, '########################################################################')
+        call append(7, '')
+        call append(8, '"""')
+        call append(9, 'Author: Miaomiao, Gao<gaomiaomiao@baidu.com>')
+        call append(10, 'Created at: '.strftime("%Y-%m-%d %H:%M:%S"))
+        call append(11, '"""')
+    endif
+
+   "如果文件类åp  型
+    if expand("%:e") == 'php'
+        call setline(1, "\<?php")
+        call append(1, "\/**")
+        call append(2, '*************************************************************************')
+        call append(3, '*')
+        call append(4, '* Copyright (c) 2017 Baidu.com, Inc. All Rights Reserved')
+        call append(5, '*')
+        call append(6, '* Filename: '.expand("%"))
+        call append(7, '*')
+        call append(8, '* Author: Miaomiao, Gao<gaomiaomiao@baidu.com>')
+        call append(9, '* Created at: '.strftime("%Y-%m-%d %H:%M:%S"))
+        call append(10, '*************************************************************************')
+        call append(11, '')
     endif
 
     normal G
