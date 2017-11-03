@@ -558,7 +558,7 @@ autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,pe
 
 
 " 定义函数AutoSetFileHead，自动插入文件头
-autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+autocmd BufNewFile *.sh,*.py,*.php exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()
     "如果文件类型为.sh文件
     if &filetype == 'sh'
@@ -585,16 +585,17 @@ function! AutoSetFileHead()
     if expand("%:e") == 'php'
         call setline(1, "\<?php")
         call append(1, "\/**")
-        call append(2, '*************************************************************************')
-        call append(3, '*')
-        call append(4, '* Copyright (c) 2017 Baidu.com, Inc. All Rights Reserved')
-        call append(5, '*')
-        call append(6, '* Filename: '.expand("%"))
-        call append(7, '*')
-        call append(8, '* Author: Miaomiao, Gao<gaomiaomiao@baidu.com>')
-        call append(9, '* Created at: '.strftime("%Y-%m-%d %H:%M:%S"))
-        call append(10, '*************************************************************************')
-        call append(11, '')
+        call append(2, ' *************************************************************************')
+        call append(3, ' *')
+        call append(4, ' * Copyright (c) 2017 Baidu.com, Inc. All Rights Reserved')
+        call append(5, ' *')
+        call append(6, ' * Filename: '.expand("%"))
+        call append(7, ' *')
+        call append(8, ' * Author: Miaomiao, Gao<gaomiaomiao@baidu.com>')
+        call append(9, ' * Created at: '.strftime("%Y-%m-%d %H:%M:%S"))
+        call append(10, ' *')
+        call append(11, ' *************************************************************************')
+        call append(12, ' */')
     endif
 
     normal G
