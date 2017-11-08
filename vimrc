@@ -641,3 +641,17 @@ colorscheme solarized
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
 " colorscheme desert
+
+function! <SID>php_comment(user,email)
+    let date = system("date +\"%Y/%m/%d %H:%M:%S\"")
+    let date = strpart(date, 0, strlen(date)-1)
+    let current_line = line('.')
+    call append(current_line+0, "    /** ")
+    call append(current_line+1, "     * @brief ")
+    call append(current_line+2, "     * @param ")
+    call append(current_line+3, "     * @return ")
+    " call append(current_line+4, "     * @author ".a:user."(".a:email.")")
+    " call append(current_line+5, "     * @date ".date)
+    call append(current_line+6, "     */")
+endfunction
+nnoremap <C-L> :call <SID>php_comment('Miaomiao,Gao', 'gaomiaomiao@baidu.com')<CR> 
