@@ -15,6 +15,9 @@ export JAVA_HOME=$JAVA_8_HOME
 export HADOOP_HOME="/usr/local/Cellar/hadoop/2.8.0"
 export HADOOP_EXAMPLE="$HADOOP_HOME/libexec/share/hadoop/mapreduce"
 
+# 设置 hive
+export HIVE_HOME="/usr/local/hive" 
+
 # 设置protobuf
 export PROTOBUF="/user/local/protobuf"
 # 设置openssl
@@ -30,8 +33,11 @@ alias jdk8="export JAVA_HOME=$JAVA_8_HOME"
 #export M2="$M2_HOME/bin"
 #export PATH="$M2:$PATH"
 
-export PATH="$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin"
-export PATH=$PROTOBUF/bin:$PATH
+export SCALA_HOME=/usr/local/Cellar/scala/2.12.3
+export SPARK_HOME=/usr/local/spark 
+
+export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+export PATH=$PROTOBUF/bin:$HIVE_HOME/bin:$SCALA_HOME/bin:$SPARK_HOME/bin:$PATH
 
 source ~/.bash_aliases
 
@@ -40,17 +46,3 @@ alias tomcat="cd /usr/local/Cellar/tomcat/8.5.3/libexec"
 #alias cat='pygmentize -O style=monokai -f console256 -g'
 
 alias hadoop_conf="cd /usr/local/Cellar/hadoop/2.8.0/libexec/etc/hadoop"
-# 登录到自己的relay，需设置relay用户名 + PIN码
-alias relay='expect $HOME/.relay.expect gaomiaomiao 19900624'
-# 如：配置自动登录自己开发机
-alias gmm='relay gaomiaomiao@cp01-rdqa-dev408-gaomiaomiao.epc.baidu.com'
-# 如：配置自动登录其他开发机
-alias rddev='relay pay@yq01-fpd-licai-20.epc.baidu.com pay'
-alias getlog='relay rd@cq02-licai-web00.cq02'
-alias jslog='relay gaomiaomiao@cp01-pay-bng00.cp01.baidu.com'
-alias bjyf='relay pay@st01-licai-web00.st01 pay'
-alias online='relay pay@st01-licai-web00.st01 pay'
-alias db='relay licai@yq01-fpd-licai-22.epc licai'
-alias hxtest='relay work@cp01-forum-ky16.cp01.baidu.com'
-alias qianmo='relay root@cp01-rd-test01-gmm-1.epc 123!@#qwe'
-alias jpaaslog='relay qa@bjyz-fsg-forjpaas-loghouse0.bjyz qa'
