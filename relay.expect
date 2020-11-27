@@ -1,8 +1,8 @@
 #!/usr/bin/expect
 # relay用户名
 set USER [lindex $argv 0]
-# relay PIN码
-set PIN [lindex $argv 1]
+# relay EMAIL_PWD
+set EMAIL_PWD [lindex $argv 1]
 # [可选]开发机地址, 如：user@host
 set HOST [lindex $argv 2]
 # [可选]开发机密码
@@ -21,18 +21,16 @@ trap {
 spawn ssh $USER@relay.xxx.com
 
 # 打开调试模式
-#exp_internal 1
-# relay PIN码 + Token(Token需手动输入)
+# exp_internal 1
+# relay EMAIL_PWD + Hi手势认证 
 expect {
     -re "@relay.xxx.com's password:" {
-        # set TOKEN $expect_out(buffer)
-        # send "$PIN$TOKEN\r"
-        send "$PIN\r"
+        send "$EMAIL_PWD\r"
         send_user "\n请打开Hi,进行手势认证!"
         exp_continue
     }
     # 自动登录开发机
-    -re "-bash-baidu-ssl*" { 
+    -re "-bash-baidu-ssl" { 
         if { "$HOST" != "" } {
             send "ssh --silent $HOST\r" 
             # [可选]自动开发机输入密码
@@ -49,6 +47,6 @@ expect {
 # 关闭调试模式
 # 将本机编码切换到utf-8，可以解决utf-8编码的文件显示中文出现乱码问题
 # 注意：如果你需要强制转换为其他编码，请修改下行的编码或者删除
-send "export LANG=en_US.UTF-8;export LC_ALL=en_US.UTF-8;export LC_CTYPE=en_US.UTF-8\r"
+# send "export LANG=en_US.UTF-8;export LC_ALL=en_US.UTF-8;export LC_CTYPE=en_US.UTF-8\r"
 interact
 exit
