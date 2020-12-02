@@ -4,6 +4,9 @@ export EDITOR=vim
 # for color
 export CLICOLOR=1
 
+# update homebrew bottle domain
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+
 # set JDK 7  
 export JAVA_7_HOME=`/usr/libexec/java_home -v 1.7`  
 
