@@ -93,3 +93,13 @@ source ~/.bash_profile
 ```
 brew update
 ```
+
+## sublimeText 3
+
+#### 插件安装
+
+* Pretty JSON
+* A File Icon
+* ayu Theme (mirage)
+
+记得将该文件 ayu-mirage.sublime-theme 拷贝到 $SUBLIME_TEXT3_PACKAGES/user/ 目录下，会发现 sublime text 的 title bar 颜色也会跟着 ayu-mirage 主题发生变化哦！
