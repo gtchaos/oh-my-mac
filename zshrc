@@ -53,7 +53,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git bundler autojump osx rake ruby python npm zsh-autosuggestions laravel5)
+plugins=(git autojump zsh-autosuggestions zsh-syntax-highlighting)
 
 source $HOME/.bash_profile
 source $ZSH/oh-my-zsh.sh
