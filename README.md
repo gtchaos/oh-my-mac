@@ -1,3 +1,7 @@
+## Homebrew 安装
+
+建议参考：https://brew.idayer.com/guide
+
 ## Vundle 
 Caution: oh-my-mac中的vimrc配置依赖于插件管理器vundle，so...你懂得！
 
