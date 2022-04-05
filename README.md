@@ -51,52 +51,6 @@ set background=dark
 colorscheme solarized
 ```
 
-## ls
-
-Mac OS X 是基于 FreeBSD 的，所以一些工具 ls, top 等都是 BSD 那一套，ls 不是 GNU ls，所以即使 Terminal/iTerm2 配置了颜色，但是在 Mac 上敲入 ls 命令也不会显示高亮，可以通过安装 coreutils 来解决（brew install coreutils），不过如果对 ls 颜色不挑剔的话有个简单办法就是在 .bash_profile 里输出 CLICOLOR=1：
-
-```
-vi ~/.bash_profile
-export CLICOLOR=1
-```
-
-## update homebrew origin
-#### 替换brew.git
-
-```
-cd "$(brew --repo)"
-# 中国科大
-git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
-# or 清华大学
-git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
-```
-
-#### 替换homebrew-core.git
-
-```
-cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-# 中国科大
-git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
-# or 清华大学
-git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
-```
-
-#### 替换homebrew-bottles
-
-```
-# 中国科大 homebrew-bottles
-echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile
-source ~/.bash_profile
-# 或者清华大学
-echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles' >> ~/.bash_profile
-source ~/.bash_profile
-```
-
-#### brew 生效
-
-```
-brew update
-```
 
 ## sublimeText 3
 
