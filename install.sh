@@ -17,16 +17,18 @@ brew install autojump
 git clone git://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# backup 
-source bash_profile
-
+# backup vimrc 
 mv ~/.vimrc ~/.vimrc.backup
-
 cp vimrc ~/.vimrc
+# backup zshrc
 mv ~/.zshrc ~/.zshrc.backup
-
 cp zshrc ~/.zshrc
-mv ~/.bash_profile ~/.bash_profile.backup
-
-cp bash_profile ~/.bash_profile
+# maven repository setting
+mkdir -p $HOME/.m2
+cp settings.xml $HOME/.m2/
 source ~/.zshrc
+
+# install wget cloc 
+brew install wget
+brew install cloc
+ 

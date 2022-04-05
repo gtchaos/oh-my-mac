@@ -22,7 +22,7 @@ spawn ssh $USER@relay.xxx.com
 
 # 打开调试模式
 # exp_internal 1
-# relay EMAIL_PWD + Hi手势认证 
+# relay EMAIL_PWD + 手势认证 
 expect {
     -re "@relay.xxx.com's password:" {
         send "$EMAIL_PWD\r"
@@ -30,7 +30,7 @@ expect {
         exp_continue
     }
     # 自动登录开发机
-    -re "-bash-baidu-ssl" { 
+    -re "-bash-ssl" { 
         if { "$HOST" != "" } {
             send "ssh --silent $HOST\r" 
             # [可选]自动开发机输入密码
