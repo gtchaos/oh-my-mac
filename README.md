@@ -2,29 +2,39 @@
 
 建议参考：https://brew.idayer.com/guide
 
-## Vundle 
-Caution: oh-my-mac中的vimrc配置依赖于插件管理器vundle，so...你懂得！
-
-Firstly Set up Vundle:
+## Vim-Plugin 
+参考：https://github.com/junegunn/vim-plug
 
 ```
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-之后，将clone的vimrc文件内容拷贝到~/.vimrc(注意：记得备份)，然后执行:VundleInstall即可使用全新的vim以及其中默认的几款插件（当然你也可以根据所需额外配置喔）。
-
-
-下面主要讲解一下Mac OS X终端的配色方案
-======================================================
-
-相信长期浸泡在终端和代码的小伙伴们都有一套自己喜爱的配色方案。以前一直在用简单、适合阅读的 Terminal.app 配色方案，换到 MacBook Pro with Retina display 后发现这个配色时间看长了眼睛有点累。不断有人推荐 Solarized，看了一些截图，感觉还不错，决定试一下。
-
-Solarized 是目前最完整的 Terminal/Editor/IDE 配色项目，几乎覆盖所有主流操作系统（Mac OS X, Linux, Windows）、编辑器和 IDE（Vim, Emacs, Xcode, TextMate, NetBeans, Visual Studio 等），终端（iTerm2, Terminal.app, Putty 等）。类似的项目还有 Tomorrow Theme.
-
-要在 Mac OS X 终端里舒服的使用命令行（至少）需要给3个工具配色，terminal、vim 和 ls. 首先下载 Solarized：
+之后，将以下内容拷贝到~/.vimrc文件中：
 
 ```
-git clone git://github.com/altercation/solarized.git
+" ==================== vim-plug 开始 ====================
+call plug#begin('~/.vim/plugged')
+
+Plug 'VundleVim/Vundle.vim'           " 让 vim-plug 自己管理自己（可选）
+Plug 'tpope/vim-fugitive'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'vim-syntastic/syntastic'
+Plug 'vim-airline/vim-airline'
+Plug 'sjl/gundo.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'chriskempson/vim-tomorrow-theme'
+
+call plug#end()
+" ==================== vim-plug 结束 ====================
+
+" 颜色主题（选一个你喜欢的）
+syntax enable
+set background=dark
+colorscheme molokai
 ```
 
 ## Terminal/iTerm2
@@ -34,22 +44,6 @@ Mac OS X 自带的 Terminal 和免费的 iTerm2 都是很好用的工具，iTerm
 如果你使用的是 Terminal 的话，在 solarized/osx-terminal.app-colors-solarized 下双击 Solarized Dark ansi.terminal 和 Solarized Light ansi.terminal 就会自动导入两种配色方案 Dark 和 Light 到 Terminal.app 里。
 
 如果你使用的是 iTerm2 的话，到 solarized/iterm2-colors-solarized 下双击 Solarized Dark.itermcolors 和 Solarized Light.itermcolors 两个文件就可以把配置文件导入到 iTerm 里。
-
-## Vim 配色
-
-Vim 的配色最好和终端的配色保持一致，不然在 Terminal/iTerm2 里使用命令行 Vim 会很别扭：
-
-```
-cd solarized
-cd vim-colors-solarized/colors
-mkdir -p ~/.vim/colors
-cp solarized.vim ~/.vim/colors/
-
-vi ~/.vimrc
-syntax enable
-set background=dark
-colorscheme solarized
-```
 
 
 ## sublimeText 3
