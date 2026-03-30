@@ -16,12 +16,18 @@ brew install autojump
 git clone git://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+# config ghostty
+mkdir -p ~/.config/ghostty
+cp ghostty.config ~/.config/ghostty/config 
 # backup vimrc 
 mv ~/.vimrc ~/.vimrc.backup
 cp vimrc ~/.vimrc
 # backup zshrc
 mv ~/.zshrc ~/.zshrc.backup
 cp zshrc ~/.zshrc
+# backup ssh-config
+mv ~/.ssh/config ~/.ssh/config.backup
+cp ssh.config ~/.ssh/config
 
 # maven repository setting
 mkdir -p $HOME/.m2
@@ -30,6 +36,8 @@ source ~/.zshrc
 
 # GPU accelerated terminal emulator
 brew install --cask ghostty
+# openssh client
+brew install trzsz-ssh
 # clean your mac 
 brew install mole
 # file browser
