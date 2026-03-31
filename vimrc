@@ -46,7 +46,7 @@ set gdefault                  " 默认全局替换（/g 自动添加）
 " ============================================
 set backspace=indent,eol,start  " 允许退格删除任何内容
 set mouse=a                   " 启用鼠标（但不依赖）
-set timeoutlen=300            " 按键等待时间（毫秒）
+set timeoutlen=2000           " 按键等待时间（毫秒）
 set updatetime=100            " 更新延迟（影响 gitgutter 等）
 set history=1000              " 命令历史
 set undofile                  " 持久化撤销历史
@@ -195,3 +195,25 @@ nnoremap <leader>fh :History<CR>
 " Git
 nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gd :Gdiffsplit<CR>
+
+" ============================================
+" vim-gitgutter 快捷键配置
+" ============================================
+
+" 基础操作（最常用）
+nnoremap <leader>gp :GitGutterPreviewHunk<CR>    " 预览当前代码块的差异
+
+" 快速导航
+nnoremap <leader>gn :GitGutterNextHunk<CR>       " 跳转到下一个差异块
+nnoremap <leader>gN :GitGutterPrevHunk<CR>       " 跳转到上一个差异块
+
+" 批量操作
+nnoremap <leader>ga :GitGutterStageAll<CR>       " 暂存所有差异
+nnoremap <leader>gA :GitGutterRevertAll<CR>      " 回退所有差异
+
+" 查看状态
+nnoremap <leader>g? :GitGutter<CR>               " 显示插件状态
+nnoremap <leader>gH :GitGutterQuickFix<CR>       " 将所有差异块加入 QuickFix 列表
+
+" 开关功能
+nnoremap <leader>gt :GitGutterToggle<CR>         " 开关 GitGutter
