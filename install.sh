@@ -3,13 +3,18 @@
 # install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# GPU accelerated terminal emulator
+brew install --cask ghostty
+
+# install zsh
+brew install zsh
+
+# install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # install autojump, autosuggestions and syntax-highlighting
 brew install autojump
@@ -19,13 +24,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # config ghostty
 mkdir -p ~/.config/ghostty
 cp ghostty.config ~/.config/ghostty/config 
-# backup vimrc 
+
+# backup vimrc/zshrc/ssh-config
 mv ~/.vimrc ~/.vimrc.backup
 cp vimrc ~/.vimrc
-# backup zshrc
 mv ~/.zshrc ~/.zshrc.backup
 cp zshrc ~/.zshrc
-# backup ssh-config
 mv ~/.ssh/config ~/.ssh/config.backup
 cp ssh.config ~/.ssh/config
 
@@ -34,8 +38,6 @@ mkdir -p $HOME/.m2
 cp settings.xml $HOME/.m2/
 source ~/.zshrc
 
-# GPU accelerated terminal emulator
-brew install --cask ghostty
 # openssh client
 brew install trzsz-ssh
 # clean your mac 
@@ -52,10 +54,9 @@ brew install cloc
 brew install tailscale
 # install golang 
 brew install go
-# install opencode
-brew install anomalyco/tap/opencode
 # install github cli
 brew install gh
 # format tool
 brew install jq yq gofumpt black prettier
-
+# mycli
+brew install mycli
