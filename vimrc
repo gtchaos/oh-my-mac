@@ -1,219 +1,958 @@
-" 插件开始
-" ============================================
-" 基础设置 - 性能优先
-" ============================================
-set nocompatible              " 关闭 vi 兼容模式
-filetype plugin indent on     " 启用文件类型检测
-syntax on                     " 启用语法高亮
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer:
+"       Amir Salihefendic - @amix3k
+"
+" Awesome_version:
+"       Get this config, nice color schemes and lots of plugins!
+"
+"       Install the awesome version from:
+"
+"           https://github.com/amix/vimrc
+"
+" Sections:
+"    -> General
+"    -> VIM user interface
+"    -> Colors and Fonts
+"    -> Files and backups
+"    -> Text, tab and indent related
+"    -> Visual mode related
+"    -> Moving around, tabs and buffers
+"    -> Status line
+"    -> Editing mappings
+"    -> vimgrep searching and cope displaying
+"    -> Spell checking
+"    -> Misc
+"    -> Helper functions
+"
+"    -> Filetype configurations
+"    -> Plugin management (vim-plug)
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ============================================
-" 界面与显示
-" ============================================
-set number                    " 显示行号
-set relativenumber            " 相对行号（快速移动）
-set cursorline                " 高亮当前行
-set showcmd                   " 显示未完成的命令
-set showmode                  " 显示当前模式
-set laststatus=2              " 始终显示状态栏
-set ruler                     " 显示光标位置
-set scrolloff=8               " 滚动时保留8行上下文
-set sidescrolloff=15          " 水平滚动保留15列
-set signcolumn=yes            " 始终显示符号列（如 git 标记）
 
-" ============================================
-" 缩进与格式
-" ============================================
-set tabstop=4                 " Tab 宽度
-set shiftwidth=4              " 自动缩进宽度
-set softtabstop=4             " 退格键删除空格数
-set expandtab                 " Tab 转空格
-set smartindent               " 智能缩进
-set autoindent                " 自动缩进
-set shiftround                " 缩进取整
-set nowrap                    " 禁止自动换行
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=1000
 
-" ============================================
-" 搜索与替换
-" ============================================
-set hlsearch                  " 高亮搜索结果
-set incsearch                 " 实时搜索
-set ignorecase                " 忽略大小写
-set smartcase                 " 智能大小写（包含大写则区分）
-set gdefault                  " 默认全局替换（/g 自动添加）
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
 
-" ============================================
-" 编辑与交互
-" ============================================
-set backspace=indent,eol,start  " 允许退格删除任何内容
-set mouse=a                   " 启用鼠标（但不依赖）
-set timeoutlen=2000           " 按键等待时间（毫秒）
-set updatetime=100            " 更新延迟（影响 gitgutter 等）
-set history=1000              " 命令历史
-set undofile                  " 持久化撤销历史
-set undodir=~/.vim/undodir    " 撤销文件目录
-set noswapfile                " 禁用交换文件
-set nobackup                  " 禁用备份文件
-set autoread                  " 文件外部修改自动重载
+" Show line number
+set number
+set relativenumber
 
-" ============================================
-" 分屏与缓冲区
-" ============================================
-set splitbelow                " 新分屏在下方
-set splitright                " 新分屏在右侧
-set hidden                    " 允许隐藏未保存的缓冲区
+" Highlight the current line
+set cursorline
 
-" ============================================
-" 折叠（可选）
-" ============================================
-set foldmethod=indent         " 基于缩进折叠
-set foldlevel=99              " 默认不折叠
-set foldenable                " 启用折叠
+" Show unfinished cmd
+set showcmd
 
-" ============================================
-" 网络与插件
-" ============================================
-set encoding=utf-8            " 编码
-set fileencoding=utf-8
-set fileformat=unix
-set wildmenu                  " 命令补全菜单
-set wildmode=full             " 补全模式
+" Show the current mode
+set showmode
 
-" Leader 键设为空格（最常用）
-let mapleader = " "
+" Keep 8 lines of context when scrolling
+set scrolloff=8
 
-" 插件管理
-call plug#begin('~/.vim/plugged')
+" Keep 15 columns of context when horizontally scrolling
+set sidescrolloff=15
 
-" 文件导航
-Plug 'preservim/nerdtree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Always display the sign column (e.g., Git markers)
+set signcolumn=yes
 
-" 代码补全与语言
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'github/copilot.vim'
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * silent! checktime
 
-" 代码注释与对齐
-Plug 'tpope/vim-commentary'
-Plug 'junegunn/vim-easy-align'
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
 
-" 状态栏与图标
-Plug 'vim-airline/vim-airline'
-"Plug 'ryanoasis/vim-devicons'
+" Fast saving
+nmap <leader>w :w!<cr>
 
-" 语法检查
-Plug 'dense-analysis/ale'
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
-" 括号/引号操作
-Plug 'tpope/vim-surround'
 
-" Git 集成
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
 
-" 快速移动
-Plug 'easymotion/vim-easymotion'
+" Avoid garbled characters in Chinese language windows OS
+let $LANG='en'
+set langmenu=en
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 
-" 启动画面
-Plug 'mhinz/vim-startify'
+" Turn on the Wild menu
+set wildmenu
 
-" 配色主题 (选择一个即可)
-Plug 'morhetz/gruvbox'
-" Plug 'sainnhe/gruvbox-material'
-" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
 
-" 插件结束
-call plug#end()
+" Always show current position
+set ruler
 
-" 启用主题 (根据选择的主题修改)
-colorscheme gruvbox
+" Height of the command bar
+set cmdheight=1
+
+" A buffer becomes hidden when it is abandoned
+set hid
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Properly disable sound on errors on MacVim
+if has("gui_macvim")
+    autocmd GUIEnter * set vb t_vb=
+endif
+
+" Add a bit extra margin to the left
+set foldcolumn=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable
+
+" Set regular expression engine automatically
+set regexpengine=0
+
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+
+try
+    colorscheme gruvbox
+catch
+    colorscheme desert
+endtry
 
 set background=dark
 
-" ========== 文件操作 ==========
-nnoremap <leader>w :w<CR>           " 保存
-nnoremap <leader>q :q<CR>           " 关闭
-nnoremap <leader>wq :wq<CR>         " 保存并关闭
-nnoremap <leader>x :x<CR>           " 保存并关闭（同 wq）
-nnoremap <leader>e :e $MYVIMRC<CR>  " 编辑配置文件
-nnoremap <leader>sv :source $MYVIMRC<CR>  " 重载配置
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
 
-" ========== 窗口与分屏 ==========
-nnoremap <leader>h :split<CR>       " 水平分屏
-nnoremap <leader>v :vsplit<CR>      " 垂直分屏
-nnoremap <C-h> <C-w>h               " 切换到左侧窗口
-nnoremap <C-j> <C-w>j               " 切换到下方窗口
-nnoremap <C-k> <C-w>k               " 切换到上方窗口
-nnoremap <C-l> <C-w>l               " 切换到右侧窗口
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
 
-" 调整窗口大小
-nnoremap <C-Left> :vertical resize -5<CR>
-nnoremap <C-Right> :vertical resize +5<CR>
-nnoremap <C-Up> :resize -5<CR>
-nnoremap <C-Down> :resize +5<CR>
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
 
-" ========== 缓冲区管理 ==========
-nnoremap <Tab> :bnext<CR>           " 下一个缓冲区
-nnoremap <S-Tab> :bprevious<CR>      " 上一个缓冲区
-nnoremap <leader>bd :bd<CR>          " 关闭当前缓冲区
 
-" ========== 搜索与导航 ==========
-nnoremap <leader>n :nohlsearch<CR>   " 清除搜索高亮
-nnoremap n nzzzv                    " 搜索时居中显示
-nnoremap N Nzzzv
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup
+set nowb
+set noswapfile
+set undofile
+set undodir=~/.vim/undodir
 
-" 快速跳转
-nnoremap <leader>j <C-d>zz          " 向下半页并居中
-nnoremap <leader>k <C-u>zz          " 向上半页并居中
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
 
-" ========== 常用操作 ==========
-" 在正常模式下按 jj 退出插入模式
-inoremap jj <Esc>
+" Be smart when using tabs ;)
+set smarttab
 
-" 快速保存并退出插入模式
-inoremap <C-s> <Esc>:w<CR>
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
-" 复制当前文件路径
-nnoremap <leader>yp :let @+=expand("%:p")<CR>
+" indent
+set smartindent
+set autoindent
+set shiftround
 
-" Y 复制到行尾（与 D、C 行为一致）
-nnoremap Y y$
+" Linebreak on 500 characters
+set lbr
+set tw=500
 
-" 粘贴时不覆盖寄存器
-xnoremap p "_dP
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
 
-" ========== 插件快捷键 ==========
-" NERDTree
-nnoremap <leader>nt :NERDTreeToggle<CR>
 
-" FZF
+""""""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <C-space> ?
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext<cr>
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <C-r>=escape(expand("%:p:h"), " ")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+" Delete trailing white space on save, useful for some filetypes ;)
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+if has("autocmd")
+    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Quickly open a buffer for scribble
+map <leader>q :e ~/buffer<cr>
+
+" Quickly open a markdown buffer for scribble
+map <leader>x :e ~/buffer.md<cr>
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
+
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
+
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
+
+    if buflisted(l:currentBufNum)
+        execute("bdelete! ".l:currentBufNum)
+    endif
+endfunction
+
+function! CmdLine(str)
+    call feedkeys(":" . a:str)
+endfunction
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+
+""""""""""""""""""""""""""""""
+" => Filetype configurations
+""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""
+" => Python section
+""""""""""""""""""""""""""""""
+let python_highlight_all = 1
+au FileType python syn keyword pythonDecorator True None False self
+
+au BufNewFile,BufRead *.jinja set syntax=html filetype=html
+au BufNewFile,BufRead *.mako set ft=mako
+
+au FileType python map <buffer> F :set foldmethod=indent<cr>
+
+au FileType python inoremap <buffer> $r return
+au FileType python inoremap <buffer> $i import
+au FileType python inoremap <buffer> $p print
+au FileType python inoremap <buffer> $f # --- <esc>a
+au FileType python map <buffer> <leader>1 /class
+au FileType python map <buffer> <leader>2 /def
+au FileType python map <buffer> <leader>C ?class
+au FileType python map <buffer> <leader>D ?def
+
+
+""""""""""""""""""""""""""""""
+" => JavaScript section
+""""""""""""""""""""""""""""""
+au FileType javascript call JavaScriptFold()
+au FileType javascript setl fen
+au FileType javascript setl nocindent
+
+au FileType javascript,typescript imap <C-t> console.log();<esc>hi
+au FileType javascript,typescript imap <C-a> alert();<esc>hi
+
+au FileType javascript,typescript inoremap <buffer> $r return
+au FileType javascript,typescript inoremap <buffer> $f // --- PH<esc>FP2xi
+
+function! JavaScriptFold()
+    setl foldmethod=syntax
+    setl foldlevelstart=1
+    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
+
+    function! FoldText()
+        return substitute(getline(v:foldstart), '{.*', '{...}', '')
+    endfunction
+    setl foldtext=FoldText()
+endfunction
+
+
+""""""""""""""""""""""""""
+" => CoffeeScript section
+""""""""""""""""""""""""""
+function! CoffeeScriptFold()
+    setl foldmethod=indent
+    setl foldlevelstart=1
+endfunction
+au FileType coffee call CoffeeScriptFold()
+
+au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+
+""""""""""""""""""""""""""
+" => Shell section
+""""""""""""""""""""""""""
+if exists('$TMUX')
+    if has('nvim')
+        set termguicolors
+    else
+        set term=screen-256color
+    endif
+endif
+
+
+""""""""""""""""""""""""""
+" => Twig section
+""""""""""""""""""""""""""
+autocmd BufRead *.twig set syntax=html filetype=html
+
+
+""""""""""""""""""""""""""
+" => Markdown
+""""""""""""""""""""""""""
+let vim_markdown_folding_disabled = 1
+
+
+""""""""""""""""""""""""""
+" => YAML
+""""""""""""""""""""""""""
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin management (vim-plug)
+"    Plugins from github/oh-my-mac/vimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+
+" File navigation
+Plug 'preservim/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'yegappan/mru'
+
+" Code completion & language
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'github/copilot.vim'
+
+" Commenting & alignment
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/vim-easy-align'
+
+" Status bar
+Plug 'vim-airline/vim-airline'
+
+" Syntax checking
+Plug 'dense-analysis/ale'
+
+" Brackets/quotes
+Plug 'tpope/vim-surround'
+
+" Git integration
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Quick motion
+Plug 'easymotion/vim-easymotion'
+
+" Start screen
+Plug 'mhinz/vim-startify'
+
+" Color scheme
+Plug 'morhetz/gruvbox'
+
+call plug#end()
+
+""""""""""""""""""""""""""""""
+" => CoC auto complete
+""""""""""""""""""""""""""""""
+inoremap <expr> <CR> pumvisible() ? coc#pum#confirm() : "<CR>"
+
+
+""""""""""""""""""""""""""""""
+" => FZF
+""""""""""""""""""""""""""""""
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fh :History<CR>
 
-" Git
+""""""""""""""""""""""""""""""
+" => Git
+""""""""""""""""""""""""""""""
 nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gd :Gdiffsplit<CR>
 
-" ============================================
-" vim-gitgutter 快捷键配置
-" ============================================
 
-" 基础操作（最常用）
-nnoremap <leader>gp :GitGutterPreviewHunk<CR>    " 预览当前代码块的差异
+""""""""""""""""""""""""""""""
+" => bufExplorer plugin
+""""""""""""""""""""""""""""""
+let g:bufExplorerDefaultHelp=0
+let g:bufExplorerShowRelativePath=1
+let g:bufExplorerFindActive=1
+let g:bufExplorerSortBy='name'
+map <leader>o :BufExplorer<cr>
 
-" 快速导航
-nnoremap <leader>gn :GitGutterNextHunk<CR>       " 跳转到下一个差异块
-nnoremap <leader>gN :GitGutterPrevHunk<CR>       " 跳转到上一个差异块
 
-" 批量操作
-nnoremap <leader>ga :GitGutterStageAll<CR>       " 暂存所有差异
-nnoremap <leader>gA :GitGutterRevertAll<CR>      " 回退所有差异
+""""""""""""""""""""""""""""""
+" => MRU plugin
+""""""""""""""""""""""""""""""
+let MRU_Max_Entries = 400
+map <leader>f :MRU<CR>
 
-" 查看状态
-nnoremap <leader>g? :GitGutter<CR>               " 显示插件状态
-nnoremap <leader>gH :GitGutterQuickFix<CR>       " 将所有差异块加入 QuickFix 列表
 
-" 开关功能
-nnoremap <leader>gt :GitGutterToggle<CR>         " 开关 GitGutter
+""""""""""""""""""""""""""""""
+" => YankStack
+""""""""""""""""""""""""""""""
+let g:yankstack_yank_keys = ['y', 'd']
+
+nmap <C-p> <Plug>yankstack_substitute_older_paste
+nmap <C-n> <Plug>yankstack_substitute_newer_paste
+
+
+""""""""""""""""""""""""""""""
+" => CTRL-P
+""""""""""""""""""""""""""""""
+let g:ctrlp_working_path_mode = 0
+
+" Quickly find and open a file in the current working directory
+let g:ctrlp_map = '<C-f>'
+map <leader>j :CtrlP<cr>
+
+" Quickly find and open a buffer
+map <leader>b :CtrlPBuffer<cr>
+
+let g:ctrlp_max_height = 20
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+
+
+""""""""""""""""""""""""""""""
+" => ZenCoding
+""""""""""""""""""""""""""""""
+" Enable all functions in all modes
+let g:user_zen_mode='a'
+
+
+""""""""""""""""""""""""""""""
+" => snipMate (beside <TAB> support <CTRL-j>)
+""""""""""""""""""""""""""""""
+ino <C-j> <C-r>=snipMate#TriggerSnippet()<cr>
+snor <C-j> <esc>i<right><C-r>=snipMate#TriggerSnippet()<cr>
+let g:snipMate = { 'snippet_version' : 1 }
+
+
+""""""""""""""""""""""""""""""
+" => Vim grep
+""""""""""""""""""""""""""""""
+let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
+set grepprg=/bin/grep\ -nH
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Nerd Tree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDTreeWinPos = "right"
+let NERDTreeShowHidden=0
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let g:NERDTreeWinSize=35
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark<Space>
+map <leader>nf :NERDTreeFind<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-multiple-cursors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-s>'
+let g:multi_cursor_select_all_word_key = '<A-s>'
+let g:multi_cursor_start_key           = 'g<C-s>'
+let g:multi_cursor_select_all_key      = 'g<A-s>'
+let g:multi_cursor_next_key            = '<C-s>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => surround.vim config
+" Annotate strings with gettext
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vmap Si S(i_<esc>f)
+au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" => lightline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ 'active': {
+"      \   'left': [ ['mode', 'paste'],
+"      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+"      \   'right': [ [ 'lineinfo' ], ['percent'] ]
+"      \ },
+"      \ 'component': {
+"      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+"      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+"      \   'fugitive': '%{exists("*FugitiveHead")?FugitiveHead():""}'
+"      \ },
+"      \ 'component_visible_condition': {
+"      \   'readonly': '(&filetype!="help"&& &readonly)',
+"      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+"      \   'fugitive': '(exists("*FugitiveHead") && ""!=FugitiveHead())'
+"      \ },
+"      \ 'separator': { 'left': ' ', 'right': ' ' },
+"      \ 'subseparator': { 'left': ' ', 'right': ' ' }
+"      \ }
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vimroom
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:goyo_width=100
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+nnoremap <silent> <leader>z :Goyo<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ale (syntax checker and linter)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8'],
+\   'go': ['go', 'golint', 'errcheck']
+\}
+
+nmap <silent> <leader>a <Plug>(ale_next_wrap)
+
+" Disabling highlighting
+let g:ale_set_highlights = 0
+
+" Only run linting when saving the file
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_virtualtext_cursor = 'disabled'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Git gutter (Git diff)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gitgutter_enabled=0
+nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => EditorConfig (project-specific EditorConfig rule)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Fugitive
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Copy the link to the line of a Git repository to the clipboard
+nnoremap <leader>v :.GBrowse!<CR>
+xnoremap <leader>v :GBrowse!<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => GUI related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set font according to system
+if has("mac") || has("macunix")
+    set gfn=IBM\ Plex\ Mono:h14,Hack:h14,Source\ Code\ Pro:h15,Menlo:h15
+elseif has("win16") || has("win32")
+    set gfn=IBM\ Plex\ Mono:h14,Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
+elseif has("gui_gtk2")
+    set gfn=IBM\ Plex\ Mono\ 14,:Hack\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+elseif has("linux")
+    set gfn=IBM\ Plex\ Mono\ 14,:Hack\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+elseif has("unix")
+    set gfn=Monospace\ 11
+endif
+
+" Disable scrollbars (real hackers don't use scrollbars for navigation!)
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+
+" Colorscheme
+set background=dark
+colorscheme gruvbox
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Command mode related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Smart mappings on the command line
+cno $h e ~/
+cno $d e ~/Desktop/
+cno $j e ./
+cno $c e <C-\>eCurrentFileDir("e")<cr>
+
+" $q is super useful when browsing on the command line
+" it deletes everything until the last slash
+cno $q <C-\>eDeleteTillSlash()<cr>
+
+" Bash like keys for the command line
+cnoremap <C-A>		<Home>
+cnoremap <C-E>		<End>
+cnoremap <C-K>		<C-U>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+" Map ½ to something useful
+map ½ $
+cmap ½ $
+imap ½ $
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Parenthesis/bracket
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vnoremap $1 <esc>`>a)<esc>`<i(<esc>
+vnoremap $2 <esc>`>a]<esc>`<i[<esc>
+vnoremap $3 <esc>`>a}<esc>`<i{<esc>
+vnoremap $$ <esc>`>a"<esc>`<i"<esc>
+vnoremap $q <esc>`>a'<esc>`<i'<esc>
+vnoremap $e <esc>`>a`<esc>`<i`<esc>
+
+" Map auto complete of (, ", ', [
+inoremap $1 ()<esc>i
+inoremap $2 []<esc>i
+inoremap $3 {}<esc>i
+inoremap $4 {<esc>o}<esc>O
+inoremap $q ''<esc>i
+inoremap $e ""<esc>i
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General abbreviations
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Omni complete functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ack searching and cope displaying
+"    requires ack.vim - it's much better than vimgrep/grep
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use the the_silver_searcher if possible (much faster than Ack)
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
+endif
+
+" When you press gv you Ack after the selected text
+vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
+
+" Open Ack and put the cursor in the right position
+map <leader>g :Ack
+
+" When you press <leader>r you can search and replace the selected text
+vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
+
+" Do :help cope if you are unsure what cope is. It's super useful!
+"
+" When you search with Ack, display your results in cope by doing:
+"   <leader>cc
+"
+" To go to the next search result do:
+"   <leader>n
+"
+" To go to the previous search results do:
+"   <leader>p
+"
+map <leader>cc :botright cope<cr>
+map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
+
+" Make sure that enter is never overriden in the quickfix window
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+func! DeleteTillSlash()
+    let g:cmd = getcmdline()
+
+    if has("win16") || has("win32")
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
+    else
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+    endif
+
+    if g:cmd == g:cmd_edited
+        if has("win16") || has("win32")
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
+        else
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+        endif
+    endif
+
+    return g:cmd_edited
+endfunc
+
+func! CurrentFileDir(cmd)
+    return a:cmd . " " . escape(expand("%:p:h"), " ") . "/"
+endfunc
+
+"=================================================================================
+"
+"   Following file contains the commands on how to run the currently open code.
+"   The default mapping is set to F5 like most code editors.
+"   Change it as you feel comfortable with, keeping in mind that it does not
+"   clash with any other keymapping.
+"
+"   NOTE: Compilers for different systems may differ. For example, in the case
+"   of C and C++, we have assumed it to be gcc and g++ respectively, but it may
+"   not be the same. It is suggested to check first if the compilers are installed
+"   before running the code, or maybe even switch to a different compiler.
+"
+"   NOTE: Adding support for more programming languages
+"
+"   Just add another elseif block before the 'endif' statement in the same
+"   way it is done in each case. Take care to add tabbed spaces after each
+"   elseif block (similar to python). For example:
+"
+"   elseif &filetype == '<your_file_extension>'
+"       exec '!<your_compiler> %'
+"
+"   NOTE: The '%' sign indicates the name of the currently open file with extension.
+"         The time command displays the time taken for execution. Remove the
+"         time command if you dont want the system to display the time
+"
+"=================================================================================
+
+map <F5> :call CompileRun()<CR>
+imap <F5> <Esc>:call CompileRun()<CR>
+vmap <F5> <Esc>:call CompileRun()<CR>
+
+func! CompileRun()
+exec "w"
+if &filetype == 'c'
+    exec "!gcc % -o %<"
+    exec "!time ./%<"
+elseif &filetype == 'cpp'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!time java %"
+elseif &filetype == 'sh'
+    exec "!time bash %"
+elseif &filetype == 'python'
+    exec "!time python3 %"
+elseif &filetype == 'html'
+    exec "!open %"
+elseif &filetype == 'go'
+    exec "!go build %<"
+    exec "!time go run %"
+elseif &filetype == 'matlab'
+    exec "!time octave %"
+endif
+endfunc
+
