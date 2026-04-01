@@ -524,9 +524,6 @@ Plug 'junegunn/fzf.vim'
 " Most Recntly Used
 Plug 'yegappan/mru'
 
-" Copy history to stack
-Plug 'maxbruner/yankstack'
-
 " Code completion & language
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'neoclide/coc-snippets'
@@ -586,15 +583,6 @@ nnoremap <leader>gd :Gdiffsplit<CR>
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
-
-
-""""""""""""""""""""""""""""""
-" => YankStack
-""""""""""""""""""""""""""""""
-let g:yankstack_yank_keys = ['y', 'd']
-
-nmap <C-p> <Plug>yankstack_substitute_older_paste
-nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
 
 """"""""""""""""""""""""""""""
