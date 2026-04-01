@@ -315,7 +315,7 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-if has("mac") || has("macunix")
+if has("macunix") || has("gui_macvim")
   nmap <D-j> <M-j>
   nmap <D-k> <M-k>
   vmap <D-j> <M-j>
@@ -560,7 +560,7 @@ call plug#end()
 """"""""""""""""""""""""""""""
 " => CoC auto complete
 """"""""""""""""""""""""""""""
-inoremap <expr> <CR> pumvisible() ? coc#pum#confirm() : "<CR>"
+inoremap <expr> <CR> coc#pum#visible() ? coc#pum#confirm() : repeat('<cr>', 1)
 
 
 """"""""""""""""""""""""""""""
@@ -682,7 +682,7 @@ xnoremap <leader>v :GBrowse!<CR>
 " => GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set font according to system
-if has("mac") || has("macunix")
+if has("macunix") || has("gui_macvim")
     set gfn=IBM\ Plex\ Mono:h14,Hack:h14,Source\ Code\ Pro:h15,Menlo:h15
 elseif has("win16") || has("win32")
     set gfn=IBM\ Plex\ Mono:h14,Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
