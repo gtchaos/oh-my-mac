@@ -53,7 +53,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git autojump zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(zoxide git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $HOME/.bash_profile
 source $ZSH/oh-my-zsh.sh
@@ -63,7 +63,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -86,5 +86,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
- export LC_ALL=en_US.UTF-8  
- export LANG=en_US.UTF-8
