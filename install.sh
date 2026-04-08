@@ -47,6 +47,8 @@ brew install fzf
 brew install zoxide
 # tssh client
 brew install trzsz-ssh
+# zellij
+brew install zellij
 # clean your mac
 brew install mole
 # mysql client
