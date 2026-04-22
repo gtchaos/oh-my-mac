@@ -6,6 +6,9 @@
 # GPU accelerated terminal emulator
 brew install --cask ghostty
 
+# install font
+brew install font-jetbrains-mono-nerd-font
+
 # install zsh
 brew install zsh
 
