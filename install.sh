@@ -51,13 +51,15 @@ brew install zoxide
 # tssh client
 brew install trzsz-ssh
 # zellij
-brew install zellij
+# brew install zellij
 # clean your mac
 brew install mole
 # mysql client
 brew install mycli
 # file browser
 brew install yazi
+# bun
+brew install oven-sh/bun/bun
 # pdf lib
 brew install poppler
 # svg lib
